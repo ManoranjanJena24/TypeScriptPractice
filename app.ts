@@ -1,89 +1,8 @@
-//1
-// function add(a,b){
-//     return a+b
-//   }
-//   console.log(add(24,2))
-//   console.log(add('1','6'))
-
-//2
-// function add(a:number,b:number){
-//     return a+b
-//   }
-//   console.log(add(24,2))
-//   console.log(add('1','6'))
-
-//3
 // const aElement=document.getElementById('a') as HTMLInputElement
 // const bElement=document.getElementById('b') as HTMLInputElement
 // const btn=document.querySelector('button')!
 
-// function add(num1:number,num2:number){
-//     return num1+num2
-//   }
-
-//   btn.addEventListener('click',()=>{
-//     const num1=aElement.value
-//     const num2=bElement.value
-//     const result=add(+num1,+num2)
-//     console.log(result)
-
-//   })
-
-//4
-// const aElement=document.getElementById('a') as HTMLInputElement
-// const bElement=document.getElementById('b') as HTMLInputElement
-// const btn=document.querySelector('button')!
-
-// function add(num1:number|string,num2:number|string){
-//     if(typeof(num1)==='number' && typeof num2==='number')
-//         return num1+num2
-//     else if (typeof(num1)==='string' && typeof num2==='string')
-//         return num1+' '+num2
-//     return +num1+ +num2
-//   }
-
-//   btn.addEventListener('click',()=>{
-//     const num1=aElement.value
-//     const num2=bElement.value
-//     const result=add(+num1, +num2)
-//     const stringResult=add(num1, num2)
-//     console.log(result)
-//     console.log(stringResult)
-//   })
-
-//   const aElement=document.getElementById('a') as HTMLInputElement
-// const bElement=document.getElementById('b') as HTMLInputElement
-// const btn=document.querySelector('button')!
-// const numresults: number[]=[]
-// const stringresults:string[]=[]
-
-// function add(num1:number|string,num2:number|string){
-//     if(typeof(num1)==='number' && typeof num2==='number')
-//         return num1+num2
-//     else if (typeof(num1)==='string' && typeof num2==='string')
-//         return num1+' '+num2
-//     return +num1+ +num2
-//   }
-
-//   function printResult(resultObj:{val:number; timestamp:Date}){
-//     console.log(resultObj.val)
-//   }
-
-//   btn.addEventListener('click',()=>{
-//     const num1=aElement.value
-//     const num2=bElement.value
-//     const result=add(+num1, +num2)
-//     const stringResult=add(num1, num2)
-//     numresults.push(result as number)
-//     stringresults.push(stringResult as string)
-//     console.log(numresults,stringresults)
-//     printResult({val:result as number, timestamp:new Date()})
-//   })
-
-// const aElement=document.getElementById('a') as HTMLInputElement
-// const bElement=document.getElementById('b') as HTMLInputElement
-// const btn=document.querySelector('button')!
-// const numresults: number[]=[]
+// const numresults: Array<number>=[]
 // const stringresults:string[]=[]
 
 // type NumOrString= number|string
@@ -118,51 +37,22 @@
 //     printResult({val:result as number, timestamp:new Date()})
 //   })
 
+//   const myPromise = new Promise<string>((resolve,reject)=>{
+//     setTimeout(()=>{
+//         resolve('It worked')
+//     },1000)
+//   });
+//   myPromise.then((result)=>{
+//     console.log(result.split('w'))
+//   })
 
-const aElement=document.getElementById('a') as HTMLInputElement
-const bElement=document.getElementById('b') as HTMLInputElement
-const btn=document.querySelector('button')!
+// import express = require('express')
+// or
+import express from 'express'
+import bodyParser from 'body-parser'
+import todoRoutes from './routes/todos'
 
-const numresults: Array<number>=[]
-const stringresults:string[]=[]
-
-type NumOrString= number|string
-type Result={val:number; timestamp:Date}
-
-interface ResultObj
-{
-    val:number; 
-    timestamp:Date
-}
-
-function add(num1:NumOrString, num2:NumOrString){
-    if(typeof(num1)==='number' && typeof num2==='number')
-        return num1+num2
-    else if (typeof(num1)==='string' && typeof num2==='string')
-        return num1+' '+num2
-    return +num1+ +num2
-  }
-
-  function printResult(resultObj:ResultObj){
-    console.log(resultObj.val)
-  }
-
-  btn.addEventListener('click',()=>{
-    const num1=aElement.value
-    const num2=bElement.value
-    const result=add(+num1, +num2)
-    const stringResult=add(num1, num2)
-    numresults.push(result as number)
-    stringresults.push(stringResult as string)
-    console.log(numresults,stringresults)
-    printResult({val:result as number, timestamp:new Date()})
-  })
-
-  const myPromise = new Promise<string>((resolve,reject)=>{
-    setTimeout(()=>{
-        resolve('It worked')
-    },1000)
-  });
-  myPromise.then((result)=>{
-    console.log(result.split('w'))
-  })
+const app = express()
+app.use(bodyParser.json())
+app.use(todoRoutes)
+app.listen(3000,() => {console.log("server running") })
